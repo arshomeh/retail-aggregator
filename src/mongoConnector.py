@@ -88,13 +88,3 @@ class MongoDB(object):
 		except Exception as e:
 			print(e)
 			sys.exit("Could not Insert data to MongoDB")
-
-
-
-		# self.DB.create_collection(
-		# 	viewName,
-		# 	viewOn= "Retail",
-		# 	pipeline=[{
-		# 		"$group" : {"_id":"$InvoiceNo", "count":{"$sum":1}}
-		# 	}]
-		# )
