@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  app:
+  retailapp:
     container_name: docker-pyspark-mongo
     build: .
     external_links:
