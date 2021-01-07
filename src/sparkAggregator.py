@@ -131,7 +131,7 @@ class SparkAggregator(object):
 		"""
 		try:
 			data = self.df.groupBy("UnitPrice").\
-				agg(sf.sum(self.df.Quantity).alias("Sold Amount")).sort(sf.col("UnitPrice"))
+				agg(sf.sum(sf.abs(self.df.Quantity)).alias("Sold Amount")).sort(sf.col("UnitPrice"))
 
 			return data.toPandas()
 		except Exception as e:
@@ -145,7 +145,7 @@ class SparkAggregator(object):
 		"""
 		try:
 			data = self.df.groupBy("InvoiceNo", "UnitPrice").\
-				agg(sf.sum(self.df.Quantity).alias("Sold Amount")).sort(sf.col("InvoiceNo"))
+				agg(sf.sum(sf.abs(self.df.Quantity)).alias("Sold Amount")).sort(sf.col("InvoiceNo"))
 
 			dataWithRatio = data.withColumn("Ratio", self.Division(sf.col("Sold Amount"), sf.col("UnitPrice")))
 
