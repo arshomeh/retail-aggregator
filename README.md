@@ -1,3 +1,3 @@
 # retail-aggregator
 
-[![Build Status](https://github.com/arshomeh/retail-aggregator/tree/main/.github/workflows/badge.svg)
+[![Build Status](https://github.com/arshomeh/retail-aggregator/.github/workflows/badge.svg)
