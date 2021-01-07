@@ -33,24 +33,25 @@ class SparkAggregator(object):
 
 	def Division(self, Quantity=None, UnitPrice=None):
 		"""
-		:param path: Path os csv File
-		:return: None
+		:param Quantity: Quantity column
+		:param UnitPrice: UnitPrice column
+		:return: the division of UnitPrice over Quantity
 		"""
 		return sf.when(Quantity<=0, 0).otherwise(UnitPrice/Quantity)
 
 
 	def Multiplication(self, Quantity=None, UnitPrice=None):
 		"""
-		:param path: Path os csv File
-		:return: None
+		:param Quantity: Quantity column
+		:param UnitPrice: UnitPrice column
+		:return: The multiplication of UnitPrice and Quantity
 		"""
 		return Quantity*UnitPrice
 
 
 	def GroupByInvoice(self):
 		"""
-		:param path: Path os csv File
-		:return: None
+		:return: The total transactions for each invoice
 		"""
 		try:
 			data = self.df.groupBy("InvoiceNo").agg(sf.count("InvoiceNo").alias("Transactions"))
@@ -63,8 +64,7 @@ class SparkAggregator(object):
 
 	def MostSoldProduct(self):
 		"""
-		:param path: Path os csv File
-		:return: None
+		:return: The StockCode and the total Sold Amount of most sold product
 		"""
 		try:
 			data = self.df.groupBy("StockCode").\
@@ -79,8 +79,7 @@ class SparkAggregator(object):
 
 	def TheCustomerWhoSpendMost(self):
 		"""
-		:param path: Path os csv File
-		:return: None
+		:return: The CustomerID and the total expenses of the customer who spend the most money
 		"""
 		try:
 			dfWithExpenses = self.df.withColumn("Expenses", self.Multiplication(sf.col("Quantity"), sf.col("UnitPrice")))
@@ -97,8 +96,7 @@ class SparkAggregator(object):
 
 	def ProductsDistributionPerCountries(self):
 		"""
-		:param path: Path os csv File
-		:return: None
+		:return: The StockCode and the sold amount of each product per countries
 		"""
 		try:
 			data = self.df.groupBy("StockCode","Country").\
@@ -116,8 +114,7 @@ class SparkAggregator(object):
 
 	def AvgUnitPrice(self):
 		"""
-		:param path: Path os csv File
-		:return: None
+		:return: The average unit price
 		"""
 		try:
 			data = self.df.dropDuplicates(["StockCode"]).agg(sf.avg(self.df.UnitPrice).alias("Avg Unit Price"))
@@ -130,8 +127,7 @@ class SparkAggregator(object):
 
 	def PriceDistribution(self):
 		"""
-		:param path: Path os csv File
-		:return: None
+		:return: The sold amount of the products for each unit price
 		"""
 		try:
 			data = self.df.groupBy("UnitPrice").\
@@ -145,8 +141,7 @@ class SparkAggregator(object):
 
 	def PriceQuantityRatioPerInvoiceNo(self):
 		"""
-		:param path: Path os csv File
-		:return: None
+		:return: The price and quantity ratio per invoice
 		"""
 		try:
 			data = self.df.groupBy("InvoiceNo", "UnitPrice").\
