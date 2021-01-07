@@ -18,30 +18,33 @@ if __name__ == "__main__":
 	mongodb = MongoDB(dbName='Online_Retail', collectionName='Retail')
 	mongodb.LoadData(converter.csvFile)
 
-	sparkCal = SparkAggregator()
+	# sparkAgg = SparkAggregator()
 
-	# data = sparkCal.GroupByInvoice()
+	# data = sparkAgg.GroupByInvoice()
 	# mongodb.InsertMany("_GroupByInvoice", data)
 
-	# data = sparkCal.MostSoldProduct()
+	# data = sparkAgg.MostSoldProduct()
 	# mongodb.InsertMany("_MostSoldProduct", data)
 
-	data = sparkCal.TheCustomerWhoSpendMost()
-	mongodb.InsertMany("_TheCustomerWithMostExpenses", data)
+	# data = sparkAgg.TheCustomerWhoSpendMost()
+	# mongodb.InsertMany("_TheCustomerWithMostExpenses", data)
 
-	# data = sparkCal.ProductsDistributionPerCountries()
-	# PlotProductsDistributionPerCountries(data)
+	# data = sparkAgg.ProductsDistributionPerCountries()
+	# inp = input("Create distribution of the products per countries charts? [Y/else]:")
+	# if inp=="Y":
+	# 	path = "../charts/ProductsDistributionPerCountries/"
+	# 	PlotProductsDistributionPerCountries(data, path)
 	# mongodb.InsertMany("_ProductsDistributionPerCountries", data)
 
-	# data = sparkCal.AvgUnitPrice()
+	# data = sparkAgg.AvgUnitPrice()
 	# mongodb.InsertMany("_AvgUnitPrice", data)
 
-	# data = sparkCal.PriceDistribution()
-	# PlotPriceDistribution(data)
+	# data = sparkAgg.PriceDistribution()
+	# inp = input("Create price distribution charts? [Y/else]:")
+	# if inp=="Y": 
+	# 	path = "../charts/PriceDistribution/"
+	# 	PlotPriceDistribution(data, path)
 	# mongodb.InsertMany("_PriceDistribution", data)
 
-	jsonString = sparkCal.PriceQuantityRatioPerInvoiceNo()
-	mongodb.InsertOne("_PriceQuantityRatioPerInvoiceNo", jsonString)
-
-
-
+	# jsonString = sparkAgg.PriceQuantityRatioPerInvoiceNo()
+	# mongodb.InsertOne("_PriceQuantityRatioPerInvoiceNo", jsonString)
