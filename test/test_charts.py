@@ -51,5 +51,5 @@ def test_PlotPriceDistribution_Pass():
 		}
 	df = pd.DataFrame(data, columns = ['UnitPrice', 'Sold Amount'])
 	PlotPriceDistribution(df, path)
-	assert os.path.exists("./files/_UnitPrice.jpg") == True
+	assert os.path.exists("./files/1_UnitPrice.jpg") == True
 	os.remove("./files/1_UnitPrice.jpg")
