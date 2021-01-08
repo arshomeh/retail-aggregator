@@ -14,7 +14,7 @@ if __name__ == "__main__":
 
 	converter = Converter(FilePath)
 	converter.XlsxToCsv()
-	
+
 	mongodb = MongoDB(dbName='Online_Retail', collectionName='Retail')
 	mongodb.LoadData(converter.csvFile)
 
@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
 	# data = sparkAgg.PriceDistribution()
 	# inp = input("Create price distribution charts? [Y/else]:")
-	# if inp=="Y": 
+	# if inp=="Y":
 	# 	path = "../charts/PriceDistribution/"
 	# 	PlotPriceDistribution(data, path)
 	# mongodb.InsertMany("_PriceDistribution", data)
