@@ -34,4 +34,11 @@ jobs:
     - name: Test with pytest
       run: |
         cd test/ && pytest --cov=../src
-        
+    - name: Code Coverage
+      uses: actions-rs/tarpaulin@v0.1
+      with:
+        args: '-v'
+    - name: Codecov.io
+      uses: codecov/codecov-action@v1.0.2
+      with:
+        token: ${{'57df83f8-425c-45f3-b2d0-5d51af7e0f6f'}}
