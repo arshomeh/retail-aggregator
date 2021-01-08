@@ -1,42 +1,46 @@
 # retail-aggregator
 
-
 [![Actions Status](https://github.com/arshomeh/retail-aggregator/workflows/Build%20and%20Test/badge.svg)](https://github.com/arshomeh/retail-aggregator/actions)
 
+### Documentation
+
+Please check the [Wiki page](https://github.com/arshomeh/retail-aggregator/wiki) for the documentation.
+
+### Notes
+
+In order to run the application, you will need docker.
+Or install manually MongoDB and the required python packages from the [requirements.txt](https://github.com/arshomeh/retail-aggregator/blob/main/requirements.txt) file. Also, you'll need to change the URI for the MongoDB connection in [mongoConnector.py](https://github.com/arshomeh/retail-aggregator/blob/main/src/mongoConnector.py) and [sparkAggregator.py](https://github.com/arshomeh/retail-aggregator/blob/main/src/sparkAggregator.py) files.
 
 ### Installation
 
-You will need docker to run.
-
+Run the following command:
 ```sh
-sudo docker-compose up
-
-sudo docker-compose run retailapp /bin/bash
+$ sudo docker-compose up
 ```
+This will build your application container and will locate the necessary files under the app directory.
+Also, it will pull and run the mongo image.
 
-Then you will be in the /app directory inside the docker.
-Navigate to the src directory and run the main file (calculation.py)
-
+Then you can run:
 ```sh
-root@292eda958eec:/app/ cd src
-root@292eda958eec:/app/src/ python calculation.py ../resources/Online\ Retail.xlsx
+$ sudo docker-compose run retailapp /bin/bash
 ```
+Now you'll run inside the docker container and you will be able to execute the application.
 
-To run the test you need to navigate to the test directory. Then run the pytest command
+### Execution
+
+From the app directory navigate to the src directory and run [retailAggregator.py](https://github.com/arshomeh/retail-aggregator/blob/main/src/retailAggregator.py) by giving as an argument the path to your xlsx file.
 
 ```sh
-root@292eda958eec:/app/ cd test
-root@292eda958eec:/app/test/ python -m pytest --cov=../src
+$ cd src/
+$ python retailAggregator.py ../resources/Online\ Retail.xlsx
 ```
+Connect with Robomongo to localhost to see the results.
 
-The result of the tests are:
+### Pytest
+
+From the app directory navigate to the test directory and run the pytest command
 
 ```sh
------------ coverage: platform linux, python 3.6.9-final-0 -----------
-Name                                                     Stmts   Miss  Cover
-----------------------------------------------------------------------------
-root@292eda958eec:/app/src/converter.py            21      0   100%
-root@292eda958eec:/app/src/mongoConnector.py       50      1    98%
-root@292eda958eec:/app/src/sparkAggregator.py      72      5    93%
-----------------------------------------------------------------------------
+$ cd test/
+$ python -m pytest --cov=../src
 ```
