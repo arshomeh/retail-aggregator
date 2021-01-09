@@ -18,33 +18,35 @@ if __name__ == "__main__":
 	mongodb = MongoDB(dbName='Online_Retail', collectionName='Retail')
 	mongodb.LoadData(converter.csvFile)
 
-	# sparkAgg = SparkAggregator()
+	sparkAgg = SparkAggregator()
 
-	# data = sparkAgg.GroupByInvoice()
-	# mongodb.InsertMany("_GroupByInvoice", data)
+	data = sparkAgg.GroupByInvoice()
+	mongodb.InsertMany("_GroupByInvoice", data)
 
-	# data = sparkAgg.MostSoldProduct()
-	# mongodb.InsertMany("_MostSoldProduct", data)
+	data = sparkAgg.MostSoldProduct()
+	mongodb.InsertMany("_MostSoldProduct", data)
 
-	# data = sparkAgg.TheCustomerWhoSpendMost()
-	# mongodb.InsertMany("_TheCustomerWithMostExpenses", data)
+	data = sparkAgg.TheCustomerWhoSpendMost()
+	mongodb.InsertMany("_TheCustomerWithMostExpenses", data)
 
-	# data = sparkAgg.ProductsDistributionPerCountries()
-	# inp = input("Create distribution of the products per countries charts? [Y/else]:")
-	# if inp=="Y":
-	# 	path = "../charts/ProductsDistributionPerCountries/"
-	# 	PlotProductsDistributionPerCountries(data, path)
-	# mongodb.InsertMany("_ProductsDistributionPerCountries", data)
+	data = sparkAgg.ProductsDistributionPerCountries()
+	mongodb.InsertMany("_ProductsDistributionPerCountries", data)
+	inp = input("Create distribution of the products per countries charts? [Y/else]:")
+	if inp=="Y":
+		path = "../charts/ProductsDistributionPerCountries/"
+		PlotProductsDistributionPerCountries(data, path)
 
-	# data = sparkAgg.AvgUnitPrice()
-	# mongodb.InsertMany("_AvgUnitPrice", data)
+	data = sparkAgg.AvgUnitPrice()
+	mongodb.InsertMany("_AvgUnitPrice", data)
 
-	# data = sparkAgg.PriceDistribution()
-	# inp = input("Create price distribution charts? [Y/else]:")
-	# if inp=="Y":
-	# 	path = "../charts/PriceDistribution/"
-	# 	PlotPriceDistribution(data, path)
-	# mongodb.InsertMany("_PriceDistribution", data)
+	data = sparkAgg.PriceDistribution()
+	mongodb.InsertMany("_PriceDistribution", data)
+	inp = input("Create price distribution charts? [Y/else]:")
+	if inp=="Y":
+		path = "../charts/PriceDistribution/"
+		PlotPriceDistribution(data, path)
 
-	# jsonString = sparkAgg.PriceQuantityRatioPerInvoiceNo()
-	# mongodb.InsertOne("_PriceQuantityRatioPerInvoiceNo", jsonString)
+	jsonString = sparkAgg.PriceQuantityRatioPerInvoiceNo()
+	mongodb.InsertOne("_PriceQuantityRatioPerInvoiceNo", jsonString)
+
+	Print("Done!")
