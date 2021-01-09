@@ -6,7 +6,7 @@ class SparkAggregator(object):
 
 	def __init__(self, Load=True):
 		"""
-		:param Load: define either connect to mongo or create an empty dataframe
+		:param Load: define either connect to mongo or create an empty list(for testing purposes)
 		:initialize connection configurations to mongoDB
 		:load the data from mongoDB to spark dataframe
 		:return: None
@@ -64,7 +64,7 @@ class SparkAggregator(object):
 
 	def MostSoldProduct(self):
 		"""
-		:return: The StockCode and the total Sold Amount of most sold product
+		:return: The StockCode and the total Sold Amount of the most sold product
 		"""
 		try:
 			data = self.df.groupBy("StockCode").\
@@ -79,7 +79,7 @@ class SparkAggregator(object):
 
 	def TheCustomerWhoSpendMost(self):
 		"""
-		:return: The CustomerID and the total expenses of the customer who spend the most money
+		:return: The CustomerID and the total expenses of the customer who spends the most money
 		"""
 		try:
 			dfWithExpenses = self.df.withColumn("Expenses", self.Multiplication(sf.col("Quantity"), sf.col("UnitPrice")))
