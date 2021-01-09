@@ -31,16 +31,17 @@ class MongoDB(object):
 		print("Inserting the data to Mongo DB")
 		try:
 			df = pd.read_csv(filePath)
-			if self.collection.count_documents({}) == 0:	
+			if self.collection.count_documents({}) == 0:
+
+				df = df[df['UnitPrice'] > 0] 
 
 				for column in df:
-					df[column].replace('', np.nan, inplace=True)
-					df[column].replace(0.0, np.nan, inplace=True)
 					df.dropna(subset=[column], inplace=True)
 
+				df['Quantity'] = df['Quantity'].astype(int)
 				df['CustomerID'] = df['CustomerID'].astype(int)
 				df['Description'] = df['Description'].astype(str)
-				
+
 				data = df.to_dict('records')
 
 				self.collection.insert_many(data, ordered=False)
@@ -55,7 +56,7 @@ class MongoDB(object):
 	def InsertMany(self, viewName=None, df=None):
 		"""
 		:param viewName: The name of the new collection
-		:param df: Spark dataframe
+		:param df: Pandas dataframe
 		:inserts the data to the new collection by once
 		:return: None
 		"""
@@ -70,10 +71,10 @@ class MongoDB(object):
 			sys.exit("Could not Insert data to MongoDB")
 
 
-	def InsertOne(self, viewName=None, jsonString=None):
+	def InsertOne(self, viewName=None, jsonStrings=None):
 		"""
 		:param viewName: The name of the new collection
-		:param jsonString: json string of the data
+		:param jsonStrings: Tuple of json strings of the data
 		:inserts the data to the new collection one by one
 		:return: None
 		"""
@@ -81,7 +82,7 @@ class MongoDB(object):
 			collectionView = self.DB[viewName]
 			collectionView.delete_many({})
 
-			for x in jsonString:
+			for x in jsonStrings:
 				x = x.replace("\\", "").replace("\"{", "{").replace("}\"", "}")
 				obj = json.loads(x)
 				collectionView.insert_one(obj)
