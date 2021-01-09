@@ -1,5 +1,6 @@
 # retail-aggregator
 
+[![Python 3.7](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/)
 [![Actions Status](https://github.com/arshomeh/retail-aggregator/workflows/Build%20and%20Test/badge.svg)](https://github.com/arshomeh/retail-aggregator/actions)
 
 ### Documentation
