@@ -53,6 +53,7 @@ class SparkAggregator(object):
 		"""
 		:return: The total transactions for each invoice
 		"""
+		print("Grouping by Invoice...")
 		try:
 			data = self.df.groupBy("InvoiceNo").agg(sf.count("InvoiceNo").alias("Transactions"))
 
@@ -66,6 +67,7 @@ class SparkAggregator(object):
 		"""
 		:return: The StockCode and the total Sold Amount of the most sold product
 		"""
+		print("Most sold product...")
 		try:
 			data = self.df.groupBy("StockCode").\
 				agg(sf.sum(sf.abs(self.df.Quantity)).alias("Sold Amount")).\
@@ -81,6 +83,7 @@ class SparkAggregator(object):
 		"""
 		:return: The CustomerID and the total expenses of the customer who spends the most money
 		"""
+		print("Customer with most expenses...")
 		try:
 			dfWithExpenses = self.df.withColumn("Expenses", self.Multiplication(sf.col("Quantity"), sf.col("UnitPrice")))
 
@@ -98,6 +101,7 @@ class SparkAggregator(object):
 		"""
 		:return: The StockCode and the sold amount of each product per countries
 		"""
+		print("Products distribution per countries...")
 		try:
 			data = self.df.groupBy("StockCode","Country").\
 				agg(sf.sum(sf.abs(self.df.Quantity)).alias("Sold Amount")).\
@@ -116,6 +120,7 @@ class SparkAggregator(object):
 		"""
 		:return: The average unit price
 		"""
+		print("Average unit price...")
 		try:
 			data = self.df.dropDuplicates(["StockCode"]).agg(sf.avg(self.df.UnitPrice).alias("Avg Unit Price"))
 
@@ -129,6 +134,7 @@ class SparkAggregator(object):
 		"""
 		:return: The sold amount of the products for each unit price
 		"""
+		print("Price distribution...")
 		try:
 			data = self.df.groupBy("UnitPrice").\
 				agg(sf.sum(sf.abs(self.df.Quantity)).alias("Sold Amount")).sort(sf.col("UnitPrice"))
@@ -143,6 +149,7 @@ class SparkAggregator(object):
 		"""
 		:return: The price and quantity ratio per invoice
 		"""
+		print("Price quantity ratio per invoice...")
 		try:
 			data = self.df.groupBy("InvoiceNo", "UnitPrice").\
 				agg(sf.sum(sf.abs(self.df.Quantity)).alias("Sold Amount")).sort(sf.col("InvoiceNo"))
