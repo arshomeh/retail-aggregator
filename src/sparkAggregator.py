@@ -103,7 +103,7 @@ class SparkAggregator(object):
 		"""
 		print("Products distribution per countries...")
 		try:
-			data = self.df.groupBy("StockCode","Country").\
+			data = self.df[self.df['Country'] != 'Unspecified'].groupBy("StockCode","Country").\
 				agg(sf.sum(sf.abs(self.df.Quantity)).alias("Sold Amount")).\
 				sort(sf.col("StockCode").desc())
 
