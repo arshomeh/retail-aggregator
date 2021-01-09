@@ -6,7 +6,7 @@ class Converter(object):
 	def __init__(self, filePath=None):
 		"""
 		:param filePath: Path to input .xlsx file
-		:cretes the .csv file with the same name as the input file
+		:cretes the path to .csv file with the same name as the input file
 		:return: None
 		"""
 		self.xmlFile = filePath
