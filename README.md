@@ -6,10 +6,10 @@
 
 Please check the [Wiki page](https://github.com/arshomeh/retail-aggregator/wiki) for the documentation.
 
-### Notes
-
-In order to run the application, you will need docker.
-Or install manually MongoDB and the required python packages from the [requirements.txt](https://github.com/arshomeh/retail-aggregator/blob/main/requirements.txt) file. Also, you'll need to change the URI for the MongoDB connection in [mongoConnector.py](https://github.com/arshomeh/retail-aggregator/blob/main/src/mongoConnector.py) and [sparkAggregator.py](https://github.com/arshomeh/retail-aggregator/blob/main/src/sparkAggregator.py) files.
+>**Note:**
+>In order to run the application, you will need docker.
+>Or install manually MongoDB and the required python packages from the [requirements.txt](https://github.com/arshomeh/retail-aggregator/blob/main/requirements.txt) file.
+>Also, you'll need to change the URI for the MongoDB connection in [mongoConnector.py](https://github.com/arshomeh/retail-aggregator/blob/main/src/mongoConnector.py) and [sparkAggregator.py](https://github.com/arshomeh/retail-aggregator/blob/main/src/sparkAggregator.py) files.
 
 ### Installation
 
