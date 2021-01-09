@@ -20,7 +20,7 @@ $ sudo docker-compose up
 This will build your application container and will locate the necessary files under the app directory.
 Also, it will pull and run the mongo image.
 
-Then you can run:
+In a new terminal run:
 ```sh
 $ sudo docker-compose run retailapp /bin/bash
 ```

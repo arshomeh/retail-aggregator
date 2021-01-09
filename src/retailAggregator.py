@@ -49,4 +49,4 @@ if __name__ == "__main__":
 	jsonString = sparkAgg.PriceQuantityRatioPerInvoiceNo()
 	mongodb.InsertOne("_PriceQuantityRatioPerInvoiceNo", jsonString)
 
-	Print("Done!")
+	print("Done!")
