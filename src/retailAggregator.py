@@ -4,8 +4,8 @@ from sparkAggregator import *
 from converter import *
 from charts import *
 
-if __name__ == "__main__":
 
+def main():
 	try:
 		FilePath = sys.argv[1]
 	except Exception as e:
@@ -50,3 +50,9 @@ if __name__ == "__main__":
 	mongodb.InsertOne("_PriceQuantityRatioPerInvoiceNo", jsonString)
 
 	print("Done!")
+
+def init():
+	if __name__ == "__main__":
+		sys.exit(main())
+
+init()
